@@ -1,0 +1,97 @@
+<div *ngIf="isInsert && !isInsertedSuccesfully">
+    <div class="insert-form">
+        <form (ngSubmit)="insertCab()">
+
+
+            <label for="customerId">carModel:</label>
+            <input type="text" id="carType" name="customerId" [(ngModel)]="cabRegistrationDto.carType" required>
+
+            <label for="perKmRate">perKmRate:</label>
+            <input type="number" id="perKmRate" name="driverId" [(ngModel)]="cabRegistrationDto.perKmRate" required>
+
+            <label for="currentLocation">currentLocation:</label>
+            <input type="text" id="currentLocation" name="email" [(ngModel)]="cabRegistrationDto.currentLocation"
+                required>
+
+            <label for="cabRegistrationNumber">cabRegistrationNumber:</label>
+            <textarea id="text" name="cabRegistrationNumber" [(ngModel)]="cabRegistrationDto.cabRegistrationNumber"
+                required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+</div>
+<div *ngIf="isInsertedSuccesfully" class="complaint-response">
+    <div class="complaint-response">
+        <span>Cab Inserted Successfully</span>
+    </div>
+
+</div>
+
+
+<div *ngIf="isView">
+    <h2>List of Cabs</h2>
+
+    <ul>
+        <li *ngFor="let cabs of cabs">
+            <strong>Car Type:</strong> {{ cabs.carType }} <br>
+            <strong>Per Km Rate:</strong> {{ cabs.perKmRate }} <br>
+            <strong>Current Location:</strong> {{ cabs.currentLocation }} <br>
+            <strong>Cab Registration Number:</strong> {{ cabs.cabRegistrationNumber }} <br>
+            <strong>Status:</strong> {{ cabs.status }} <br>
+
+            <!-- Add more properties as needed -->
+            <hr>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="isDriver">
+    <h2>List of Drivers</h2>
+
+    <ul>
+        <li *ngFor="let driverDetails of driverDetails">
+            <strong>username:</strong> {{ driverDetails.username }} <br>
+            <strong>mobileNumber:</strong> {{ driverDetails.mobileNumber }} <br>
+            <strong>address:</strong> {{ driverDetails.address }} <br>
+            <strong>driverId:</strong> {{ driverDetails.driverId }} <br>
+            <strong>licenseNo:</strong> {{ driverDetails.licenseNo }} <br>
+            <strong>Status:</strong> {{ driverDetails.status }} <br>
+
+            <!-- Add more properties as needed -->
+            <hr>
+            <button (click)="approveDriver(driverDetails.driverId)">Approve</button>
+            <!-- <button (click)="rejectDriver(driverDetails.driverId)">Reject</button> -->
+
+        </li>
+    </ul>
+</div>
+
+
+<div *ngIf="isRating">
+    <p>Please enter the rating</p>
+    <div *ngIf="!showDrivers"> <input type="decimal" name="rating" [(ngModel)]="rating" /> <br><br>
+        <button (click)="viewDriversByRating()"> Submit</button>
+    </div>
+    <div  *ngIf="showDrivers">
+        <h2>List of Drivers</h2>
+
+        <ul>
+            <li *ngFor="let driverDetails of driverDetails">
+                <strong>username:</strong> {{ driverDetails.username }} <br>
+                <strong>mobileNumber:</strong> {{ driverDetails.mobileNumber }} <br>
+                <strong>address:</strong> {{ driverDetails.address }} <br>
+                <strong>driverId:</strong> {{ driverDetails.driverId }} <br>
+                <strong>licenseNo:</strong> {{ driverDetails.licenseNo }} <br>
+                <strong>Status:</strong> {{ driverDetails.status }} <br>
+
+                <!-- Add more properties as needed -->
+                <hr>
+
+
+            </li>
+        </ul>
+    </div>
+</div>

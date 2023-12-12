@@ -1,0 +1,64 @@
+
+<div class="topbar">
+    <div class="topbartitle">CabBookingPlatform<img class="image"
+        src="https://icons-for-free.com/iconfiles/png/512/taxi+icon-1320085755769745456.png" width="45px" height="40px"
+        alt="image of logo"></div>
+    <div class="topbaruser">
+      <div>Hello {{driverName}}</div>
+      <button (click)="doLogout()">Logout</button>
+    </div>
+
+  </div>
+<div class="button-container button-position">
+<button (click)="viewComplaints()">view Complaint</button>
+<button (click)="viewReivews()">Reviews</button>
+<button (click) ="onGoingTrips()">OngoingTrip</button>
+<button (click)="viewProfileDetails()">Profile</button>
+</div>
+
+
+<div *ngIf="viewComplaintsList && !viewOngoingTripDetails !isViewReviews">
+    <app-complaint [driverId]="driverId" [mode]="mode"></app-complaint>
+</div>
+
+
+<div *ngIf="!viewComplaintsList && viewOngoingTripDetails !isViewReviews">
+<strong>tripBookingId:</strong> {{ onGoingTripsDetails.tripBookingId }} <br>
+<strong>customerId:</strong> {{ onGoingTripsDetails.customerId }} <br>
+<strong>fromLocation:</strong> {{ onGoingTripsDetails.fromLocation }} <br>
+<strong>toLocation:</strong> {{ onGoingTripsDetails.toLocation }} <br>
+<strong>fromDateTime:</strong> {{ onGoingTripsDetails.fromDateTime }} <br>
+ 
+<strong>distanceInKm:</strong> {{ onGoingTripsDetails.distanceInKm }} <br>
+<strong>bill:</strong> {{ onGoingTripsDetails.bill | currency:'INR' }} <br>
+<strong>customerName:</strong> {{ onGoingTripsDetails.customername}} <br>
+<strong>mobilenumber:</strong> {{ onGoingTripsDetails.mobileNumber}} <br>
+ 
+
+<button (click) = "endTrip(onGoingTripsDetails.tripBookingId)">end trip</button>
+</div>
+
+<div *ngIf="!viewComplaintsList && !viewOngoingTripDetails && viewProfile && !isViewReviews">
+    <strong>driverId:</strong> {{ driverDetailsDto.driverId }} <br>
+    <strong>licenseNo:</strong> {{ driverDetailsDto.licenseNo }} <br>
+    <strong>Status:</strong> {{ driverDetailsDto.status }} <br>
+    <strong>Rating:</strong> {{ driverDetailsDto.avgRating }} <br>
+    <strong>CurrentLocation:</strong> {{ driverDetailsDto.currentLocation }} <br>
+  
+     
+    </div>
+
+    <div *ngIf="!viewComplaintsList && !viewOngoingTripDetails && !viewProfile && isViewReviews">
+        <div >
+        
+            <ul>
+              <li *ngFor="let reviews of reviewDto">
+                <strong>rating:</strong> {{ reviews.rating }} <br>
+                <strong>comment:</strong> {{ reviews.comment }} <br>
+        
+                <!-- Add more properties as needed -->
+                <hr>
+              </li>
+            </ul></div>
+         
+        </div>

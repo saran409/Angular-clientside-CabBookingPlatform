@@ -1,0 +1,40 @@
+<div class="topbar">
+    <div class="topbartitle">CabBookingPlatform<img class="image"
+            src="https://icons-for-free.com/iconfiles/png/512/taxi+icon-1320085755769745456.png" width="45px"
+            height="40px" alt="image of logo">
+    </div>
+    <div class="topbaruser">
+        <h4>Hello {{adminName}}</h4>
+        <button (click)="doLogout()">Logout</button>
+    </div>
+</div>
+
+<div class="button-container button-position">
+    <button (click)="insertCabs()"> insert cab</button>
+    <button (click)="viewCabs()"> view cabs</button>
+    <button (click)="viewDrivers()"> view drivers</button>
+    <button (click)="viewComplaints()"> view Complaints</button>
+    <button (click)="viewRating()"> view Driver By Rating</button>
+
+</div>
+
+<div *ngIf="viewComplaintList && !isInsertCab && !isViewCabs && !isViewDrivers">
+    <app-complaint [type]="admin"></app-complaint>
+</div>
+
+
+<div *ngIf="!viewComplaintList && isInsertCab && !isViewCabs && !isViewDrivers">
+    <app-cab [val]="val"></app-cab>
+</div>
+
+<div *ngIf="!viewComplaintList && !isInsertCab && isViewCabs && !isViewDrivers">
+    <app-cab [val]="val"></app-cab>
+</div>
+
+<div *ngIf="!viewComplaintList && !isInsertCab && !isViewCabs && isViewDrivers">
+    <app-cab [val]="val"></app-cab>
+</div>
+
+<div *ngIf="!viewComplaintList && !isInsertCab && !isViewCabs && !isViewDrivers && isViewRating">
+    <app-cab [val]="val"></app-cab>
+</div>

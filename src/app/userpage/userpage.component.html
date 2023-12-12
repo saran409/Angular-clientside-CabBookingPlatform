@@ -1,0 +1,122 @@
+<div class="topbody">
+  <div class="topbar">
+    <div class="topbartitle">CabBookingPlatform<img class="image"
+        src="https://icons-for-free.com/iconfiles/png/512/taxi+icon-1320085755769745456.png" width="45px" height="40px"
+        alt="image of logo"></div>
+    <div class="topbaruser">
+      <div>Hello {{customerName}}</div>
+      <button (click)="doLogout()">Logout</button>
+    </div>
+ 
+  </div>
+  <div class="button-container button-position">
+ 
+    <button (click)="viewBookingHistory()">View History</button>
+    <button (click)="createComplaintForm()">Create Complaint</button>
+    <button (click)="viewComplaints()">view Complaint</button>
+    <button (click)="onGoingTrips()">OngoingTrip</button>
+    <button (click)="viewProfile()">Profile</button>
+    <button (click)="viewHome()">Home</button>
+ 
+ 
+  </div>
+  <div class="insert-form" *ngIf="!createComplaint && !viewComplaintsList && !viewHistory && !ongoingtripDetails && !profileView && !bookedCab">
+    <h3 style="color: chocolate;">Book a Cab</h3>
+    <form (ngSubmit)="createTripBooking()">
+ 
+ 
+      <label for="fromLocation">fromLocation:</label>
+      <input type="text" id="fromLocation" name="fromLocation" [(ngModel)]="createTrip.fromLocation" required>
+ 
+      <label for="toLocation">toLocation:</label>
+      <input type="text" id="toLocation" name="toLocation" [(ngModel)]="createTrip.toLocation" required>
+ 
+      <label for="customerId">customerId:</label>
+      <input type="text" id="customerId" name="customerId" [(ngModel)]="createTrip.customerId" required readonly="true">
+      <button type="submit">Submit</button>
+    </form>
+    <h5 *ngIf="bookedCab">Successfully booked the cab</h5>
+  </div>
+ 
+ 
+  <div  class="trip-details-container" *ngIf="!createComplaint && !viewComplaintsList && viewHistory && !ongoingtripDetails && !profileView">
+ 
+ 
+     <table>
+ 
+      <tr class="header1">
+          <td class="firstheader"><strong>tripBookingId:</strong> </td>
+          <td class="firstheader"><strong>customerId:</strong></td>
+          <td class="firstheader"><strong>fromLocation:</strong></td>
+          <td class="firstheader"><strong>toLocation:</strong></td>
+          <td class="firstheader"><strong>fromDateTime:</strong></td>
+          <td class="firstheader"><strong>status:</strong> </td>
+          <td class="firstheader"><strong>distanceInKm:</strong></td>
+          <td class="firstheader"><strong>bill:</strong></td>
+          <td class="firstheader"><strong>drivername:</strong></td>
+          <td class="firstheader"><strong>mobileNumber:</strong></td>
+          <td class="firstheader"><strong>email:</strong></td>
+          <td class="firstheader"><strong>cabRegistrationNumber:</strong></td>
+          <td class="firstheader"><strong>carType:</strong></td>
+ 
+      </tr>
+      <tr *ngFor="let tripDetails of tripsList">
+       <td> {{ tripDetails.tripBookingId }} <br></td>  
+        <td>  {{ tripDetails.customerId }} <br></td>
+        <td>  {{ tripDetails.fromLocation }} <br></td>
+        <td>  {{ tripDetails.toLocation }} <br></td>
+        <td>  {{ tripDetails.fromDateTime }} <br></td>
+        <td> {{ tripDetails.status }} <br></td>
+        <td>  {{ tripDetails.distanceInKm }} <br></td>
+       <td>  {{ tripDetails.bill | currency:'INR' }} <br></td>  
+       <td>  {{ tripDetails.drivername }} <br></td>  
+       <td>  {{ tripDetails.mobileNumber }} <br></td>  
+       <td>  {{ tripDetails.email }} <br></td>
+       <td>  {{ tripDetails.cabRegistrationNumber }} <br></td>
+       <td>  {{ tripDetails.carType }} <br></td>
+      </tr>
+     </table>
+  </div>
+     
+ 
+  <div *ngIf="createComplaint && !viewComplaintsList && !ongoingtripDetails &&!viewHistory && !profileView">
+    <app-complaint [customerId]="customerId" [mode]="mode"></app-complaint>
+  </div>
+ 
+  <div *ngIf="!createComplaint && viewComplaintsList && !ongoingtripDetails && !viewHistory && !profileView">
+    <app-complaint [customerId]="customerId" [mode]="mode"></app-complaint>
+  </div>
+ 
+  <div class="trip-details-container" *ngIf="!createComplaint && !viewComplaintsList && ongoingtripDetails && !viewHistory && !profileView">
+ 
+    <strong>tripBookingId:</strong> {{ onGoingTripsDetails.tripBookingId }} <br>
+    <strong>customerId:</strong> {{ onGoingTripsDetails.customerId }} <br>
+    <strong>fromLocation:</strong> {{ onGoingTripsDetails.fromLocation }} <br>
+    <strong>toLocation:</strong> {{ onGoingTripsDetails.toLocation }} <br>
+    <strong>fromDateTime:</strong> {{ onGoingTripsDetails.fromDateTime }} <br>
+    <strong>status:</strong> {{ onGoingTripsDetails.status }} <br>
+    <strong>distanceInKm:</strong> {{ onGoingTripsDetails.distanceInKm }} <br>
+    <strong>bill:</strong> {{ onGoingTripsDetails.bill | currency:'INR'}} <br>
+    <strong>drivername:</strong> {{ onGoingTripsDetails.drivername }} <br>
+    <strong>mobileNumber:</strong> {{ onGoingTripsDetails.mobileNumber }} <br>
+    <strong>email:</strong> {{ onGoingTripsDetails.email }} <br>
+    <strong>cabRegistrationNumber:</strong> {{ onGoingTripsDetails.cabRegistrationNumber }} <br>
+    <strong>carType:</strong> {{ onGoingTripsDetails.carType }} <br>
+  </div>
+ 
+ 
+ 
+  <div *ngIf="!createComplaint && !viewComplaintsList && !ongoingtripDetails && !viewHistory && profileView">
+    <strong>customerId:</strong> {{ customerDto.customerId }} <br>
+    <strong>username:</strong> {{ customerDto.username }} <br>
+    <strong>address:</strong> {{ customerDto.address }} <br>
+    <strong>mobileNumber:</strong> {{ customerDto.mobileNumber }} <br>
+    <strong>email:</strong> {{ customerDto.email }} <br>
+ 
+     
+    </div>
+ <div class="footer">
+ 
+ </div>
+ 
+</div>

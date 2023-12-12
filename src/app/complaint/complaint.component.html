@@ -1,0 +1,77 @@
+<!-- complaint.component.html -->
+<div *ngIf="createComplaints">
+
+<div class="compalint-form" *ngIf="!isSubmitted && !type">
+  
+   
+      <h2>Complaint Registration</h2>
+   
+   
+      <form (ngSubmit)="submitComplaint()">
+       
+   
+        <label for="customerId">Customer ID:</label>
+        <input type="text" id="customerId" name="customerId" [(ngModel)]="complaintDto.customerId" required>
+   
+        <label for="driverId">Driver ID:</label>
+        <input type="text" id="driverId" name="driverId" [(ngModel)]="complaintDto.driverId" required>
+   
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="complaintDto.email" required>
+   
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" [(ngModel)]="complaintDto.comment" required></textarea>
+   
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+   
+    <div *ngIf="isSubmitted" class="complaint-response">
+      <div class="complaint-response">
+        <span>Complaint Raised Successfully</span>
+    </div>
+
+   
+      </div>
+   </div>
+  
+              <div *ngIf="customerId || driverId || type">
+                <div *ngIf="viewComplaints">
+        <h2>List of Complaints</h2>
+    
+        <ul>
+          <li *ngFor="let complaint of complaintDtoList">
+            <strong>comment:</strong> {{ complaint.comment }} <br>
+            <strong>email:</strong> {{ complaint.email }} <br>
+            <strong>customerId:</strong> {{ complaint.customerId }} <br>
+            <strong>driverId :</strong> {{ complaint.driverId }} <br>
+            <strong>Status:</strong> {{ complaint.status }} <br>
+              
+
+      <div class="compalint-form" *ngIf=" type && complaint.status=='Pending'">
+  
+   
+        <h2>Update Complaint</h2>
+     
+     
+        <form (ngSubmit)="submittedUpdatedComplaint(status.value,resolution.value,complaint.complaintId)">
+         
+     
+          <label for="status">status:</label>
+          <input type="text" id="status" name="status" #status required>
+     
+          <label for="resolution">resolution:</label>
+          <input type="text" id="resolution" name="resolution" #resolution required>
+     
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+     
+            <!-- Add more properties as needed -->
+            <hr>
+          </li>
+        </ul></div>
+      </div>
+
+
+   

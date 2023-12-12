@@ -1,0 +1,182 @@
+<div class="header1"><h1 class="text1" style="color: rgb(247, 242, 236); padding-top: 5px;">CabBookingPlatform</h1>  </div>
+ 
+
+ 
+<div  class ="container">
+    <form class="form-horizontal" role="form"  (ngSubmit)="doRegister()">
+      <h2>Registration</h2>
+      <div class="form-group">
+        <label for="username" class="col-sm-3 control-label">User Name</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="User Name"
+            class="form-control"
+            [(ngModel)]="dto.username"
+            autofocus
+            required
+            #username="ngModel"
+            
+          />
+        </div>
+        <div
+          *ngIf="username.pristine == false && username.invalid == true"
+          style="color: red"
+        >
+          <p>username cannot be empty</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email" class="col-sm-3 control-label">Email* </label>
+        <div class="col-sm-9">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="dto.email"
+            
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="col-sm-3 control-label">Password*</label>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            class="form-control"
+            [(ngModel)]="dto.password"
+            required
+                    #password="ngModel" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{0,6}"
+            
+          />
+        </div>
+        <div
+        *ngIf="password.pristine == false && password.invalid == true"
+        style="color: rgb(250, 4, 4)"
+      >
+        <p>**password must contain one upper and one lower and contains 6 characters</p>
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="checkpassword" class="col-sm-3 control-label"
+          >Confirm Password*</label
+        >
+        <div *ngIf="isPassword"  style="color: rgb(250, 4, 4)"><p>**invalid password please re-enter</p></div>
+        <div class="col-sm-9">
+          <input
+            type="password"
+            id="checkpassword"
+            name="checkpassword"
+            placeholder="Password"
+            class="form-control"
+            [(ngModel)]="checkpassword"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="phone" class="col-sm-3 control-label">Phone number </label>
+        <div class="col-sm-9">
+          <input
+            type="phoneNumber"
+            id="mobileNumber"
+            name="mobileNumber"
+            placeholder="Mobile number"
+            class="form-control"
+            [(ngModel)]="dto.mobileNumber"
+            required
+            #mobileNumber="ngModel" pattern="[0-9]{10}"
+          />
+          <div
+        *ngIf="mobileNumber.pristine == false && mobileNumber.invalid == true"
+        style="color: rgb(250, 4, 4)"
+      ><p>*Mobile number must be 10 digits</p>
+          <div *ngIf="mobileNumber.invalid==true && mobileNumber.pristine==false && mobileNumber.touched==true" style="color:red;font-style: italic;font-size: small;">*Please Enter Valid Phone Number</div>
+        </div>
+         
+       
+        
+      </div>
+      </div>
+      <div class="form-group">
+        <label for="houseAddress" class="col-sm-3 control-label">Address</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="Address"
+            class="form-control"
+            [(ngModel)]="dto.address"
+            
+            autofocus
+          />
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="select" class="col-sm-3 control-label">Role</label>
+        <div class="col-sm-9">
+          <select class="form-control" name="role" id="role"  [(ngModel)]="role">
+            <option>--selected--</option>
+            <option value="Driver">Driver</option>
+            <option value="Customer">Customer</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="role === 'Driver'">
+        <label for="region" class="col-sm-3 control-label">CurrentLocation</label>
+        <div class="col-sm-9">
+          <select
+            class="form-control"
+            id="currentLocation"
+            name="currentLocation"
+            [(ngModel)]="dto.currentLocation"
+          >
+            <option>--selected--</option>
+            <option value="Bangalore">Bangalore</option>
+            <option value="Mysore">Mysore</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Coimbatore">Coimbatore</option>
+            
+          </select>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="role === 'Driver'">
+        <label for="LicenseNo" class="col-sm-3 control-label"
+          >LicenseNo</label
+        >
+        <div class="col-sm-9">
+          <input
+            type="text"
+            id="licenseNo"
+            name="licenseNo"
+            placeholder="LicenseNo"
+            class="form-control"
+            [(ngModel)]="dto.licenseNo"
+        
+            autofocus
+          />
+        </div>
+      </div>
+       
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+          <span class="help-block">*Required fields</span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form>
+ 
+ 
+  </div>
+  <div class="footer"><P>hello</P></div>
+  
+  
